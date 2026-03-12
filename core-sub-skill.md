@@ -207,6 +207,45 @@ If user prompt ONLY references prior CR ("status?", "is it done?"):
 - E073: 6-Bullet Format
 - CR020: Terminal Format Update
 - **E163: CR as Conversation Memory ← ACTIVE**
+- **E167: Stage Gate Verification Protocol ← ACTIVE**
+
+---
+
+## 12. Phase Transition Gates (E167)
+
+**Purpose:** Prevent E163 Pattern (documented but not enforced)
+
+**The Gates:**
+```
+Discovery ──[GATE D→D]──> Design ──[GATE D→B]──> Build ──[GATE B→V]──> Validate ──[GATE V→De]──> Deliver
+```
+
+**Gate D→D (Discovery → Design Review):**
+- REQUIREMENTS.md exists
+- CR created (E159)
+- Prompts logged (E163)
+- **Enforcement:** Advisory (Level 1)
+
+**Gate D→B (Design → Build):**
+- DESIGN.md exists (E004)
+- Constraints documented (E078)
+- Assumptions tracked (E079)
+- **Enforcement:** Advisory (Level 1)
+
+**Gate B→V (Build → Validation):**
+- Syntax check passed (E001) ← **BLOCKING**
+- No "should work" claims (E007)
+- Verification run (E014)
+- Verification not skipped (E088) ← **BLOCKING**
+- **Enforcement:** Blocking (Level 2)
+
+**Gate V→De (Validation → Delivery):**
+- Pre-delivery checks done (E003)
+- Evidence archived (E080)
+- Resolution documented (E160)
+- **Enforcement:** Advisory (Level 1)
+
+**Reference:** `sub-skills/phase-transition-gate.md`
 
 ---
 

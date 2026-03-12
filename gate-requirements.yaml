@@ -1,0 +1,124 @@
+# Gate Requirements Configuration
+# Defines what must be verified before each phase transition
+
+version: "1.0"
+description: "Stage Gate Verification Protocol - E167 Implementation"
+
+gates:
+  D_D:
+    id: "D→D"
+    name: "Discovery to Design Review"
+    enforcement_level: 1
+    requirements:
+      - id: "REQ-001"
+        enhancement: "E006"
+        name: "REQUIREMENTS.md exists"
+        check: "file_exists"
+        target: "REQUIREMENTS.md"
+        required: true
+      - id: "REQ-002"
+        enhancement: "E159"
+        name: "CR created"
+        check: "file_exists"
+        target: "enhancements/change/CR*.md"
+        required: true
+      - id: "REQ-003"
+        enhancement: "E163"
+        name: "Prompts logged"
+        check: "cr_has_turns"
+        min_turns: 1
+        required: true
+
+  D_B:
+    id: "D→B"
+    name: "Design to Build"
+    enforcement_level: 1
+    requirements:
+      - id: "REQ-010"
+        enhancement: "E004"
+        name: "DESIGN.md exists"
+        check: "file_exists"
+        target: "DESIGN.md"
+        required: true
+      - id: "REQ-011"
+        enhancement: "E078"
+        name: "Constraints documented"
+        check: "file_has_section"
+        target: "DESIGN.md"
+        section: "Constraints"
+        required: true
+      - id: "REQ-012"
+        enhancement: "E079"
+        name: "Assumptions tracked"
+        check: "file_has_section"
+        target: "DESIGN.md"
+        section: "Assumptions"
+        required: true
+
+  B_V:
+    id: "B→V"
+    name: "Build to Validation"
+    enforcement_level: 2
+    requirements:
+      - id: "REQ-020"
+        enhancement: "E001"
+        name: "Syntax check passed"
+        check: "syntax_parse"
+        target: "deliverables/*"
+        required: true
+        critical: true
+      - id: "REQ-021"
+        enhancement: "E007"
+        name: "No 'should work' claims"
+        check: "content_scan"
+        target: "*"
+        forbidden: ["should work", "should pass", "probably"]
+        required: true
+      - id: "REQ-022"
+        enhancement: "E014"
+        name: "Verification run"
+        check: "directory_not_empty"
+        target: "evidence/"
+        required: true
+      - id: "REQ-024"
+        enhancement: "E088"
+        name: "Verification not skipped"
+        check: "content_scan"
+        target: "*"
+        forbidden: ["skip verification", "bypass"]
+        required: true
+        critical: true
+
+  V_De:
+    id: "V→De"
+    name: "Validation to Delivery"
+    enforcement_level: 1
+    requirements:
+      - id: "REQ-030"
+        enhancement: "E003"
+        name: "Pre-delivery checks done"
+        check: "checklist_complete"
+        required: true
+      - id: "REQ-031"
+        enhancement: "E080"
+        name: "Evidence archived"
+        check: "directory_exists"
+        target: "evidence/"
+        required: true
+      - id: "REQ-032"
+        enhancement: "E160"
+        name: "Resolution documented"
+        check: "cr_has_resolution"
+        required: true
+
+enforcement_levels:
+  1:
+    name: "Advisory"
+    can_override: true
+  2:
+    name: "Blocking"
+    can_override: true
+    require_justification: true
+  3:
+    name: "Non-Bypassable"
+    can_override: false
