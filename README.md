@@ -1,5 +1,3 @@
-⚠️ **Warning:** This was all generated with AI whilst features may be documented they may not work at all. This is purely an experiment. A very frustrating one at times. **Warning:** ⚠️
-
 # 🎩 Consultancy Skill
 
 > **Universal domain-configurable trio-agency consultancy system for Kimi CLI.**  
@@ -231,6 +229,26 @@ AI: ✅ Delivered and archived.
 
 ---
 
+## Phase Gates (Quality Assurance)
+
+The consultancy skill includes **mandatory verification gates** between phases to ensure quality:
+
+| Gate | When | Checks |
+|------|------|--------|
+| **D→D** | Discovery → Design Review | REQUIREMENTS.md, CR created, prompts logged |
+| **D→B** | Design → Build | DESIGN.md, constraints, assumptions documented |
+| **B→V** | Build → Validation | **Syntax check** (E001), **no "should work"**, verification run |
+| **V→De** | Validation → Delivery | Pre-delivery checklist (7 checks), evidence archived |
+
+**Enforcement Levels:**
+- **Advisory (L1):** Warning, can override
+- **Blocking (L2):** Must fix or formally justify (E001, E088)
+- **Non-Bypassable (L3):** No override (not currently used)
+
+[More about Phase Gates →](sub-skills/phase-transition-gate.md)
+
+---
+
 ## Personalization
 
 The skill learns your preferences over time. Edit `user-preferences.yaml` in the skill directory to add:
@@ -296,8 +314,6 @@ kimi chat
 
 [More troubleshooting help →](sections/09-Troubleshooting.md)
 
----
-⚠️ **Warning:** This was all generated with AI whilst features may be documented they may not work at all. This is purely an experiment. A very frustrating one at times. **Warning:** ⚠️
 ---
 
 ## License
