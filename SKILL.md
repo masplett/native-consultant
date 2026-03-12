@@ -308,4 +308,40 @@ BEFORE any verification:
 
 ---
 
+## Conversation Memory (CR-as-Memory Protocol)
+
+**Activated by:** User preference `pref_003: cr_as_memory`
+
+**Behavior:** Every user prompt creates or appends to a Change Request file.
+
+### Why
+- Persist conversation across context resets
+- Build audit trail of decisions
+- Enable session resume
+- Capture learned preferences
+
+### How
+```
+User prompt → Check/Create CR###.md → Record prompt
+     ↓
+AI response → Record response → Update CR
+     ↓
+Session end → Mark RESOLVED or keep ACTIVE
+```
+
+### Location
+```
+enhancements/
+├── change/       # Active sessions
+└── resolved/     # Completed sessions
+```
+
+### Manual Trigger
+User can say: `"log this as CR"` or `"start CR for this"`
+
+### Protocol Reference
+See: `protocols/cr-as-memory.md`
+
+---
+
 *End Skill Definition*

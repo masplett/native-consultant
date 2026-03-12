@@ -233,6 +233,20 @@ AI: ✅ Delivered and archived.
 
 The skill learns your preferences over time. Edit `user-preferences.yaml` in the skill directory to add:
 
+### Built-in Preferences
+
+| ID | Pattern | Effect |
+|----|---------|--------|
+| pref_001 | quality_over_speed | Always prioritize quality |
+| pref_002 | full_traceability | Require complete documentation |
+| pref_003 | **cr_as_memory** | **Log all prompts as Change Requests** |
+
+With `pref_003` enabled, every conversation is persisted to `enhancements/change/` for long-term memory and audit trail.
+
+### Custom Preferences
+
+Add your own:
+
 - Decision criteria (quality vs speed preferences)
 - Completion standards (what "done" means to you)
 - Communication style preferences
