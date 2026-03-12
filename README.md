@@ -1,3 +1,5 @@
+⚠️ **Warning:** This was all generated with AI whilst features may be documented they may not work at all. This is purely an experiment. A very frustrating one at times. **Warning:** ⚠️
+
 # 🎩 Consultancy Skill
 
 > **Universal domain-configurable trio-agency consultancy system for Kimi CLI.**  
@@ -294,6 +296,8 @@ kimi chat
 
 [More troubleshooting help →](sections/09-Troubleshooting.md)
 
+---
+⚠️ **Warning:** This was all generated with AI whilst features may be documented they may not work at all. This is purely an experiment. A very frustrating one at times. **Warning:** ⚠️
 ---
 
 ## License
