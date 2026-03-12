@@ -1,8 +1,21 @@
-# 🎩 Native Consultant
+# 🎩 Consultancy Skill
 
-> **Native Kimi CLI skill for structured AI consulting.**  
-> Works with `kimi chat` and `kimi web`.  
+> **Universal domain-configurable trio-agency consultancy system for Kimi CLI.**  
 > Maker creates. Validator verifies. Aligner ensures fit.
+
+---
+
+## Documentation
+
+📖 **[Complete User Manual & Training Guide →](MANUAL.md)**
+
+- [Quick Start (5 min)](sections/02-Quick-Start.md)
+- [The Trio Explained](sections/03-The-Trio.md)
+- [Six-Phase Workflow](sections/04-Six-Phases.md)
+- [Five Domains](sections/05-Domains.md)
+- [5 Project Examples](sections/08-Fictitious-Projects.md)
+- [Troubleshooting](sections/09-Troubleshooting.md)
+- [Reference Guide](sections/10-Reference.md)
 
 ---
 
@@ -12,8 +25,8 @@
 
 ```cmd
 # Clone the repository
-git clone https://github.com/yourusername/native-consultant.git
-cd native-consultant
+git clone https://github.com/yourusername/consultancy-skill.git
+cd consultancy-skill\release
 
 # Run installer
 INSTALL.bat
@@ -21,7 +34,7 @@ INSTALL.bat
 
 Or manually:
 ```cmd
-xcopy /E /I "native-consultant" "%USERPROFILE%\.config\agents\skills\native-consultant"
+xcopy /E /I "consultancy-skill\release" "%USERPROFILE%\.config\agents\skills\consultancy"
 ```
 
 ### Use
@@ -68,6 +81,8 @@ You talk to the **Contact** (AI). Behind the scenes:
 
 Quality comes from tension between roles, not one AI doing everything.
 
+[More about the Trio →](sections/03-The-Trio.md)
+
 ---
 
 ## Commands
@@ -81,6 +96,8 @@ Quality comes from tension between roles, not one AI doing everything.
 | `status` | Current phase and progress |
 | `pause` | Save state, resume later |
 | `exit` | Return to normal mode |
+
+[More commands & examples →](sections/10-Reference.md)
 
 ---
 
@@ -130,6 +147,8 @@ ENTRY: consult | explore | fast-track
 │ Handover         │
 └──────────────────┘
 ```
+
+[Complete workflow walkthrough →](sections/04-Six-Phases.md)
 
 ---
 
@@ -206,6 +225,23 @@ AI: ✅ Delivered and archived.
 | **aerospace** | Engineer | QA | Architect | Rocket parts, components |
 | **enterprise** | Developer | QA/Security | Product Owner | Corporate systems |
 
+[Detailed domain guide with examples →](sections/05-Domains.md)
+
+---
+
+## Personalization
+
+The skill learns your preferences over time. Edit `user-preferences.yaml` in the skill directory to add:
+
+- Decision criteria (quality vs speed preferences)
+- Completion standards (what "done" means to you)
+- Communication style preferences
+- Domain-specific defaults
+
+See the examples in the file for format.
+
+[More about personalization →](sections/07-User-Preferences.md)
+
 ---
 
 ## Safety
@@ -241,6 +277,8 @@ Restart your Kimi CLI session:
 ```cmd
 kimi chat
 ```
+
+[More troubleshooting help →](sections/09-Troubleshooting.md)
 
 ---
 

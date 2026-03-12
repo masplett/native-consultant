@@ -1,7 +1,7 @@
 ---
-name: native-consultant
+name: consultancy-skill
 description: |
-  Native Kimi CLI skill for structured AI consulting.
+  Universal domain-configurable trio-agency consultancy system for Kimi CLI.
   
   Orchestrates Maker (creates), Validator (verifies), and Aligner (ensures fit)
   through 6-phase workflow: Discovery → Design Review → Build → Validation Review → QA → Delivery
@@ -13,11 +13,9 @@ description: |
   - "[domain] consult"
   
   Provides terminal format responses, lazy-loaded sub-skills, and safety gates.
-  
-  Works with both `kimi chat` (terminal) and `kimi web` (browser interface).
 ---
 
-# Native Consultant v6.1 — Kimi CLI Skill
+# Consultancy Skill v6.1 — Kimi CLI
 
 **Role:** Contact (orchestrates Maker/Validator/Aligner trio)  
 **Workflow:** 6-phase with gates  

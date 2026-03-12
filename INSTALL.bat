@@ -1,9 +1,9 @@
 @echo off
-REM Native Consultant Installation Script for Windows
+REM Consultancy Skill Installation Script for Windows
 REM Installs skill files to the user's Kimi CLI skills directory
 
 echo ============================================
-echo   Native Consultant Installer
+echo   Consultancy Skill Installer
 echo   v6.1
 echo ============================================
 echo.
@@ -13,7 +13,7 @@ set "SOURCE_DIR=%~dp0"
 set "SOURCE_DIR=%SOURCE_DIR:~0,-1%"
 
 REM Determine target skills directory
-set "TARGET_DIR=%USERPROFILE%\.config\agents\skills\native-consultant"
+set "TARGET_DIR=%USERPROFILE%\.config\agents\skills\consultancy"
 
 echo Source: %SOURCE_DIR%
 echo Target: %TARGET_DIR%
@@ -61,12 +61,17 @@ if not exist "%TARGET_DIR%\protocols" mkdir "%TARGET_DIR%\protocols" 2>nul
 if not exist "%TARGET_DIR%\templates" mkdir "%TARGET_DIR%\templates" 2>nul
 if not exist "%TARGET_DIR%\specialists" mkdir "%TARGET_DIR%\specialists" 2>nul
 
+REM Copy user preferences (personalized for this user)
+echo Setting up user preferences...
+copy /Y "%SOURCE_DIR%\user-preferences.yaml" "%TARGET_DIR%\user-preferences.yaml" >nul
+
 REM Copy main skill files
 echo Installing main skill files...
 copy /Y "%SOURCE_DIR%\SKILL.md" "%TARGET_DIR%\" >nul
 copy /Y "%SOURCE_DIR%\README.md" "%TARGET_DIR%\" >nul
 copy /Y "%SOURCE_DIR%\domains.yaml" "%TARGET_DIR%\" >nul
 copy /Y "%SOURCE_DIR%\skill-manifest.yaml" "%TARGET_DIR%\" >nul
+copy /Y "%SOURCE_DIR%\TERSE_SUMMARY.md" "%TARGET_DIR%\" >nul
 
 REM Copy sub-skills
 echo Installing sub-skills...
@@ -105,7 +110,7 @@ echo ============================================
 echo   Installation Complete!
 echo ============================================
 echo.
-echo Native Consultant v6.1 installed to:
+echo Consultancy Skill v6.1 installed to:
 echo   %TARGET_DIR%
 echo.
 echo Directory structure:
@@ -114,8 +119,9 @@ echo   - sub-skills/ (phases, domains, patterns)
 echo   - protocols/ (handoff, final-qa)
 echo   - templates/ (maker, validator, aligner tasks)
 echo   - specialists/ (spawn-on-demand roles)
+echo   - user-preferences.yaml (personalized settings)
 echo.
-echo To use Native Consultant:
+echo To use Consultancy Skill:
 echo.
 echo   1. Start Kimi CLI:
 echo      kimi chat
@@ -128,6 +134,11 @@ echo      explore      - Quick prototype first
 echo      fast-track   - Express mode
 echo.
 echo   3. The consulting workflow will activate
+echo.
+echo.
+echo Personalization:
+echo   Edit user-preferences.yaml to add your preferences.
+echo   The AI will learn and apply these automatically.
 echo.
 echo For updates, re-run this installer.
 echo.

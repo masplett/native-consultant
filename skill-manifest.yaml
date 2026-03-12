@@ -1,10 +1,10 @@
-# Native Consultant v6.1 Manifest
+# Consultancy Skill v6.0 Manifest
 # Hierarchical, Lazy-Loaded Sub-Skill System
 
 skill:
-  name: native-consultant
-  version: "6.1.0"
-  description: "Native Kimi CLI skill for structured AI consulting with Maker/Validator/Aligner trio"
+  name: consultancy
+  version: "6.0.0"
+  description: "Universal domain-configurable trio-agency consultancy system"
   
   # Core is always loaded
   core:

@@ -1,0 +1,87 @@
+# User Preferences Template for Consultancy Skill
+# Copy this file to your user config directory during installation
+# Location: %USERPROFILE%\.config\agents\skills\consultancy\user-preferences.yaml
+#
+# This file captures learned preferences from your interactions with the AI.
+# The AI will read this to personalize its behavior for you.
+
+user:
+  name: "{{USER_NAME}}"  # Replace with your name
+  preference_learning: "enabled"
+
+# ============================================================================
+# PREFERENCE EXAMPLES (Commented)
+# ============================================================================
+# The following are example preferences captured from actual sessions.
+# Uncomment and modify for your needs, or delete if not applicable.
+
+preferences:
+  # -------------------------------------------------------------------------
+  # Example 1: Decision Criteria Preference
+  # -------------------------------------------------------------------------
+  # - id: "pref_001"
+  #   category: "decision_criteria"
+  #   pattern: "quality_over_speed_cost"
+  #   established: "YYYY-MM-DD"
+  #   source: "CR###"
+  #   quote: "I choose quality over speed"
+  #   full_context: "When given tradeoffs between speed, cost, and quality, always prioritize quality."
+  #   principle: "Evaluate options on quality dimension first, ignore speed/cost unless quality is equal"
+  #   applies_when:
+  #     - "multiple_options_presented"
+  #     - "tradeoffs_exist_between_speed_cost_quality"
+  #     - "archiving_or_documenting_work"
+  #   selection_rule: "Choose highest quality option regardless of label (A/B/C)"
+  #   priority: "critical"
+
+  # -------------------------------------------------------------------------
+  # Example 2: Completion Standards Preference
+  # -------------------------------------------------------------------------
+  # - id: "pref_002"
+  #   category: "completion_standards"
+  #   pattern: "full_traceability_required"
+  #   established: "YYYY-MM-DD"
+  #   source: "CR###"
+  #   quote: "this information will be used in future"
+  #   principle: "Work must be complete enough to be useful for future reference"
+  #   applies_when:
+  #     - "resolving_enhancements"
+  #     - "creating_documentation"
+  #     - "archiving_work"
+  #   requires:
+  #     - "metadata_sections"
+  #     - "resolution_sections"
+  #     - "clear_linkages"
+  #   priority: "high"
+
+  # -------------------------------------------------------------------------
+  # Example 3: Communication Protocol Preference
+  # -------------------------------------------------------------------------
+  # - id: "pref_003"
+  #   category: "communication_protocol"
+  #   pattern: "cr_as_memory"
+  #   established: "YYYY-MM-DD"
+  #   source: "E163_conversation"
+  #   principle: "Every prompt is a change request; conversation is persisted in CR"
+  #   rule: "All prompts create or append to CR; AI responses appended before delivery"
+  #   applies_when:
+  #     - "every_user_prompt"
+  #   exceptions:
+  #     - "prompt_refers_only_to_previous_cr_adds_nothing_new"
+  #   action: "record_as_comment_on_existing_cr"
+  #   priority: "critical"
+
+# ============================================================================
+# ADD YOUR PERSONAL PREFERENCES BELOW
+# ============================================================================
+# The AI will learn these over time and apply them automatically.
+#
+# Preference Categories:
+# - decision_criteria    : How you make choices (quality vs speed, etc.)
+# - completion_standards : What "done" means to you
+# - communication_style  : How you prefer information presented
+# - communication_protocol: Special rules for interaction
+# - domain_defaults      : Preferred defaults for specific domains
+# - safety_tolerance     : Your comfort level with automated actions
+# - verification_level   : How much proof you want
+
