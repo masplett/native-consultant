@@ -92,12 +92,20 @@ REM Copy protocols
 echo Installing protocols...
 copy /Y "%SOURCE_DIR%\protocols\handoff.md" "%TARGET_DIR%\protocols\" >nul
 copy /Y "%SOURCE_DIR%\protocols\final-qa.md" "%TARGET_DIR%\protocols\" >nul
+copy /Y "%SOURCE_DIR%\protocols\cr-as-memory.md" "%TARGET_DIR%\protocols\" >nul
 
 REM Copy templates
 echo Installing templates...
 copy /Y "%SOURCE_DIR%\templates\maker-task.md" "%TARGET_DIR%\templates\" >nul
 copy /Y "%SOURCE_DIR%\templates\validator-task.md" "%TARGET_DIR%\templates\" >nul
 copy /Y "%SOURCE_DIR%\templates\aligner-task.md" "%TARGET_DIR%\templates\" >nul
+copy /Y "%SOURCE_DIR%\templates\cr-template.md" "%TARGET_DIR%\templates\" >nul
+
+REM Copy documentation sections
+echo Installing documentation...
+if not exist "%TARGET_DIR%\sections" mkdir "%TARGET_DIR%\sections" 2>nul
+copy /Y "%SOURCE_DIR%\sections\*.md" "%TARGET_DIR%\sections\" >nul
+copy /Y "%SOURCE_DIR%\MANUAL.md" "%TARGET_DIR%\" >nul
 
 REM Copy specialists
 echo Installing specialists...
