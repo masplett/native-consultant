@@ -113,6 +113,29 @@ skill:
       file: "specialists/performance-developer.md"
       spawn_trigger: "performance constraints specified"
 
+# Phase Transition Gates (E167)
+phase_gates:
+  discovery_to_design:
+    file: "sub-skills/phase-transition-gate.md"
+    trigger: "discovery complete"
+    requirements: ["E159", "E163"]
+    
+  design_to_build:
+    file: "sub-skills/phase-transition-gate.md"
+    trigger: "design approved"
+    requirements: ["E004", "E078", "E079"]
+    
+  build_to_validate:
+    file: "sub-skills/phase-validator-execution.md"
+    trigger: "build complete"
+    requirements: ["E001", "E007", "E014", "E088"]
+    enforcement_level: 2  # BLOCKING
+    
+  validate_to_deliver:
+    file: "sub-skills/phase-transition-gate.md"
+    trigger: "validation passed"
+    requirements: ["E003", "E080", "E160"]
+
 # Context budget allocation
 context_budget:
   core: "10KB"
@@ -120,11 +143,12 @@ context_budget:
   active_domain: "8KB"
   patterns: "10KB"
   specialist: "3KB"
+  phase_gates: "8KB"
   available_for_task: "100KB"
 
 # Enhancement tracking
 enhancements:
-  total: 156
+  total: 167
   resolved_dir: "enhancements/resolved/"
   active_dir: "enhancements/"
   change_dir: "enhancements/change/"
@@ -137,3 +161,9 @@ enhancements:
     used_in_phases: ["discovery", "build", "validate"]
     used_in_domains: ["software", "manufacturing"]
     used_in_complexity: ["simple", "medium", "complex"]
+  
+  # Recent implementations
+  recently_implemented:
+    - E163: "CR as Conversation Memory — runtime complete"
+    - E164: "Gap Analysis — identified E163 Pattern"
+    - E167: "Stage Gate Verification — Phase 1+2 complete"
