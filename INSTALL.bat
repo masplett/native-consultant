@@ -4,7 +4,7 @@ REM Installs skill files to the user's Kimi CLI skills directory
 
 echo ============================================
 echo   Native Consultant Installer
-echo   (Kimi CLI Skill)
+echo   v6.1
 echo ============================================
 echo.
 
@@ -39,29 +39,81 @@ if not exist "%SOURCE_DIR%\SKILL.md" (
     exit /b 1
 )
 
-REM Create target directory if it doesn't exist
+if not exist "%SOURCE_DIR%\domains.yaml" (
+    echo ERROR: domains.yaml not found in source directory
+    pause
+    exit /b 1
+)
+
+REM Create target directory structure
+echo Creating directory structure...
 if not exist "%TARGET_DIR%" (
-    echo Creating directory: %TARGET_DIR%
     mkdir "%TARGET_DIR%" 2>nul
     if errorlevel 1 (
-        echo ERROR: Failed to create directory
+        echo ERROR: Failed to create directory %TARGET_DIR%
         pause
         exit /b 1
     )
 )
 
-REM Copy skill files
-echo Installing skill files...
+if not exist "%TARGET_DIR%\sub-skills" mkdir "%TARGET_DIR%\sub-skills" 2>nul
+if not exist "%TARGET_DIR%\protocols" mkdir "%TARGET_DIR%\protocols" 2>nul
+if not exist "%TARGET_DIR%\templates" mkdir "%TARGET_DIR%\templates" 2>nul
+if not exist "%TARGET_DIR%\specialists" mkdir "%TARGET_DIR%\specialists" 2>nul
+
+REM Copy main skill files
+echo Installing main skill files...
 copy /Y "%SOURCE_DIR%\SKILL.md" "%TARGET_DIR%\" >nul
 copy /Y "%SOURCE_DIR%\README.md" "%TARGET_DIR%\" >nul
+copy /Y "%SOURCE_DIR%\domains.yaml" "%TARGET_DIR%\" >nul
+copy /Y "%SOURCE_DIR%\skill-manifest.yaml" "%TARGET_DIR%\" >nul
+
+REM Copy sub-skills
+echo Installing sub-skills...
+copy /Y "%SOURCE_DIR%\sub-skills\core-sub-skill.md" "%TARGET_DIR%\sub-skills\" >nul
+copy /Y "%SOURCE_DIR%\sub-skills\phase-discovery.md" "%TARGET_DIR%\sub-skills\" >nul
+copy /Y "%SOURCE_DIR%\sub-skills\phase-design.md" "%TARGET_DIR%\sub-skills\" >nul
+copy /Y "%SOURCE_DIR%\sub-skills\phase-build.md" "%TARGET_DIR%\sub-skills\" >nul
+copy /Y "%SOURCE_DIR%\sub-skills\phase-validate.md" "%TARGET_DIR%\sub-skills\" >nul
+copy /Y "%SOURCE_DIR%\sub-skills\phase-deliver.md" "%TARGET_DIR%\sub-skills\" >nul
+copy /Y "%SOURCE_DIR%\sub-skills\phase-transition-protocol.md" "%TARGET_DIR%\sub-skills\" >nul
+copy /Y "%SOURCE_DIR%\sub-skills\domain-software.md" "%TARGET_DIR%\sub-skills\" >nul
+copy /Y "%SOURCE_DIR%\sub-skills\domain-manufacturing.md" "%TARGET_DIR%\sub-skills\" >nul
+copy /Y "%SOURCE_DIR%\sub-skills\domain-fashion.md" "%TARGET_DIR%\sub-skills\" >nul
+copy /Y "%SOURCE_DIR%\sub-skills\domain-enterprise.md" "%TARGET_DIR%\sub-skills\" >nul
+copy /Y "%SOURCE_DIR%\sub-skills\patterns-composability.md" "%TARGET_DIR%\sub-skills\" >nul
+
+REM Copy protocols
+echo Installing protocols...
+copy /Y "%SOURCE_DIR%\protocols\handoff.md" "%TARGET_DIR%\protocols\" >nul
+copy /Y "%SOURCE_DIR%\protocols\final-qa.md" "%TARGET_DIR%\protocols\" >nul
+
+REM Copy templates
+echo Installing templates...
+copy /Y "%SOURCE_DIR%\templates\maker-task.md" "%TARGET_DIR%\templates\" >nul
+copy /Y "%SOURCE_DIR%\templates\validator-task.md" "%TARGET_DIR%\templates\" >nul
+copy /Y "%SOURCE_DIR%\templates\aligner-task.md" "%TARGET_DIR%\templates\" >nul
+
+REM Copy specialists
+echo Installing specialists...
+copy /Y "%SOURCE_DIR%\specialists\requirements-analyst.md" "%TARGET_DIR%\specialists\" >nul
+copy /Y "%SOURCE_DIR%\specialists\security-developer.md" "%TARGET_DIR%\specialists\" >nul
+copy /Y "%SOURCE_DIR%\specialists\performance-developer.md" "%TARGET_DIR%\specialists\" >nul
 
 echo.
 echo ============================================
 echo   Installation Complete!
 echo ============================================
 echo.
-echo Native Consultant skill installed to:
+echo Native Consultant v6.1 installed to:
 echo   %TARGET_DIR%
+echo.
+echo Directory structure:
+echo   - Main skill files (SKILL.md, README.md, etc.)
+echo   - sub-skills/ (phases, domains, patterns)
+echo   - protocols/ (handoff, final-qa)
+echo   - templates/ (maker, validator, aligner tasks)
+echo   - specialists/ (spawn-on-demand roles)
 echo.
 echo To use Native Consultant:
 echo.
@@ -71,9 +123,9 @@ echo      or
 echo      kimi web
 echo.
 echo   2. Say one of:
-echo      explore     - Quick prototype first
-echo      consult     - Standard workflow
-echo      fast-track  - Express mode
+echo      consult      - Standard 6-phase workflow
+echo      explore      - Quick prototype first
+echo      fast-track   - Express mode
 echo.
 echo   3. The consulting workflow will activate
 echo.

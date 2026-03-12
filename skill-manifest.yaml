@@ -1,0 +1,139 @@
+# Native Consultant v6.1 Manifest
+# Hierarchical, Lazy-Loaded Sub-Skill System
+
+skill:
+  name: native-consultant
+  version: "6.1.0"
+  description: "Native Kimi CLI skill for structured AI consulting with Maker/Validator/Aligner trio"
+  
+  # Core is always loaded
+  core:
+    file: "sub-skills/core-sub-skill.md"
+    size: "3KB"
+    always_loaded: true
+  
+  # Phases load based on workflow state
+  phases:
+    discovery:
+      file: "sub-skills/phase-discovery.md"
+      size: "1.6KB"
+      triggers:
+        - "user says 'consult'"
+        - "phase == discovery"
+        - "new engagement started"
+      
+    design:
+      file: "sub-skills/phase-design.md"
+      size: "1.5KB"
+      triggers:
+        - "phase == design"
+        - "requirements gathered"
+      
+    build:
+      file: "sub-skills/phase-build.md"
+      size: "2KB"
+      triggers:
+        - "phase == build"
+        - "design approved"
+      requires:
+        - "patterns/composability"  # If complex
+      
+    validate:
+      file: "sub-skills/phase-validate.md"
+      size: "1.8KB"
+      triggers:
+        - "phase == validate"
+        - "maker claims complete"
+      
+    deliver:
+      file: "sub-skills/phase-deliver.md"
+      size: "1.2KB"
+      triggers:
+        - "phase == deliver"
+        - "validation passed"
+  
+  # Domains load based on auto-detection
+  domains:
+    software:
+      file: "sub-skills/domain-software.md"
+      size: "1.2KB"
+      triggers:
+        - "keywords in [code, python, javascript, api, script]"
+        - "extensions in [.py, .js, .ts, .html]"
+      
+    manufacturing:
+      file: "sub-skills/domain-manufacturing.md"
+      size: "1KB"
+      triggers:
+        - "keywords in [3d print, cad, stl, manufacture]"
+        - "extensions in [.stl, .step, .obj]"
+      
+    fashion:
+      file: "sub-skills/domain-fashion.md"
+      size: "1KB"
+      triggers:
+        - "keywords in [dress, wedding, fashion, garment, fabric]"
+      
+    enterprise:
+      file: "sub-skills/domain-enterprise.md"
+      size: "1.2KB"
+      triggers:
+        - "keywords in [corporate, enterprise, system, platform]"
+        - "extensions in [.java, .cs, .go]"
+  
+  # Patterns load based on complexity
+  patterns:
+    composability:
+      file: "sub-skills/patterns-composability.md"
+      size: "1.4KB"
+      triggers:
+        - "project_complexity in [medium, complex]"
+        - "multiple components detected"
+        - "parallel work needed"
+      
+    architecture:
+      file: "sub-skills/patterns-architecture.md"
+      size: "3KB"
+      triggers:
+        - "project_complexity == complex"
+        - "regulated industry"
+        - "high scale requirements"
+  
+  # Specialists spawn on demand
+  specialists:
+    requirements_analyst:
+      file: "specialists/requirements-analyst.md"
+      spawn_trigger: "discovery phase needs deep analysis"
+      
+    security_developer:
+      file: "specialists/security-developer.md"
+      spawn_trigger: "security requirements detected"
+      
+    performance_developer:
+      file: "specialists/performance-developer.md"
+      spawn_trigger: "performance constraints specified"
+
+# Context budget allocation
+context_budget:
+  core: "10KB"
+  active_phase: "5KB"
+  active_domain: "8KB"
+  patterns: "10KB"
+  specialist: "3KB"
+  available_for_task: "100KB"
+
+# Enhancement tracking
+enhancements:
+  total: 156
+  resolved_dir: "enhancements/resolved/"
+  active_dir: "enhancements/"
+  change_dir: "enhancements/change/"
+  
+  metadata_format:
+    id: "E###"
+    status: "IMPLEMENTED | IN_PROGRESS | PENDING"
+    type: "Category"
+    requires: ["E###", "E###"]  # Dependencies
+    used_in_phases: ["discovery", "build", "validate"]
+    used_in_domains: ["software", "manufacturing"]
+    used_in_complexity: ["simple", "medium", "complex"]

@@ -1,0 +1,665 @@
+# Domain Configurations for Consultancy Skill
+# Defines the Maker/Validator/Aligner trio for each domain
+
+meta:
+  version: "5.0.1"
+  description: "Universal trio configurations with platform adaptation"
+  default_domain: "software"
+
+# Platform Adaptation Tiers
+# Different platforms have different verification capabilities
+platform_tiers:
+  tier_a_full_tools:
+    name: "Full Tool Access"
+    platforms: ["kimi-cli", "local-ai-with-tools"]
+    capabilities:
+      - actual_code_execution
+      - file_system_access
+      - test_runners
+      - linters
+      - simulators
+    confidence_label: "HIGH - Verified with tools"
+    user_action: "None - verification complete"
+    
+  tier_b_limited_tools:
+    name: "Limited Tool Access"
+    platforms: ["kimi-cli-restricted", "vscode-copilot"]
+    capabilities:
+      - static_analysis
+      - partial_execution
+      - file_reading
+    confidence_label: "MEDIUM - Partial verification"
+    user_action: "Run tests locally to confirm"
+    
+  tier_c_text_only:
+    name: "Text-Only Platforms"
+    platforms: ["chatgpt", "claude", "gemini", "deepseek"]
+    capabilities:
+      - code_review
+      - logic_analysis
+      - pattern_matching
+      - syntax_checking
+    confidence_label: "LOW - Simulated verification only"
+    user_action: "⚠️ REQUIRED: Manually verify on real system before using"
+    note: "This verification is simulated. Actual testing required."
+
+domains:
+  software:
+    name: "Software Development"
+    icon: "💻"
+    keywords:
+      - code
+      - python
+      - javascript
+      - typescript
+      - script
+      - api
+      - database
+      - function
+      - app
+      - program
+      - software
+    file_extensions:
+      - ".py"
+      - ".js"
+      - ".ts"
+      - ".html"
+      - ".css"
+      - ".sql"
+      - ".json"
+      - ".yaml"
+    
+    roles:
+      maker:
+        name: "Coder"
+        title: "Software Developer"
+        mindset: "I write clean, working code that solves real problems"
+        responsibilities:
+          - Write complete, runnable code
+          - Implement features per specification
+          - Fix defects identified by Validator
+          - Document code and usage
+        tools:
+          - "Python/JavaScript/TypeScript"
+          - "Code editors/IDEs"
+          - "Version control (git)"
+        outputs:
+          - "Source code files"
+          - "Test files"
+          - "Documentation"
+          - "Configuration"
+          
+      validator:
+        name: "Tester"
+        title: "Quality Assurance Engineer"
+        mindset: "I find what's broken before it reaches the user"
+        responsibilities:
+          - Verify code works as specified
+          - Test edge cases and error conditions
+          - Measure coverage and quality
+          - Report specific, actionable defects
+        tools:
+          - "pytest / jest / testing frameworks"
+          - "ruff / eslint / linters"
+          - "Code execution environments"
+          - "Coverage analysis"
+        outputs:
+          - "Verification report"
+          - "Test results"
+          - "Defect list"
+          - "Coverage metrics"
+          
+      aligner:
+        name: "Business Analyst"
+        title: "Business Analyst"
+        mindset: "I ensure we solve the right problem for the business"
+        responsibilities:
+          - Interview client to understand true need
+          - Validate requirements are clear and testable
+          - Ensure solution aligns with business goals
+          - Flag scope creep and misalignment
+        tools:
+          - "Requirements analysis"
+          - "User story definition"
+          - "Acceptance criteria"
+          - "Stakeholder communication"
+        outputs:
+          - "REQUIREMENTS.md"
+          - "Acceptance criteria"
+          - "Risk assessment"
+          - "Alignment confirmation"
+    
+    verification_methods:
+      syntax_check:
+        name: "Syntax Validation"
+        tool: "ruff / eslint"
+        criteria: "Zero syntax errors"
+        
+      execution:
+        name: "Code Execution"
+        tool: "python / node"
+        criteria: "Runs without crash"
+        
+      test_suite:
+        name: "Test Suite"
+        tool: "pytest / jest"
+        criteria: ">80% tests pass"
+        
+      coverage:
+        name: "Code Coverage"
+        tool: "coverage.py / c8"
+        criteria: ">80% line coverage"
+        
+    deliverable_format: "Code repository with tests and documentation"
+    
+    documentation_template: |
+      ## Software Deliverable
+      
+      ### Code
+      - Location: {path}
+      - Language: {language}
+      
+      ### Tests
+      - Pass rate: {pass}/{total}
+      - Coverage: {coverage}%
+      
+      ### Usage
+      ```bash
+      {usage_instructions}
+      ```
+
+  manufacturing:
+    name: "Manufacturing / 3D Printing"
+    icon: "🏭"
+    keywords:
+      - "3d print"
+      - cad
+      - stl
+      - part
+      - component
+      - manufacture
+      - fabricate
+      - prototype
+      - mesh
+      - dimension
+    file_extensions:
+      - ".stl"
+      - ".step"
+      - ".obj"
+      - ".f3d"
+      - ".3mf"
+    
+    roles:
+      maker:
+        name: "Designer"
+        title: "CAD Designer"
+        mindset: "I create functional, manufacturable designs"
+        responsibilities:
+          - Create 3D models and CAD files
+          - Design for manufacturability
+          - Specify materials and tolerances
+          - Generate technical drawings
+        tools:
+          - "Fusion 360 / SolidWorks / Blender"
+          - "CAD modeling"
+          - "Technical drawing"
+        outputs:
+          - "3D model files (STL, STEP)"
+          - "Technical drawings"
+          - "Material specifications"
+          - "Manufacturing notes"
+          
+      validator:
+        name: "Engineer"
+        title: "Manufacturing Engineer"
+        mindset: "I validate structural integrity and manufacturability"
+        responsibilities:
+          - Verify mesh integrity (watertight, manifold)
+          - Run structural simulations
+          - Assess printability and supports needed
+          - Calculate cost and time estimates
+        tools:
+          - "Mesh analysis (Netfabb, Meshmixer)"
+          - "FEA simulation"
+          - "Slicer software (Cura, PrusaSlicer)"
+          - "Cost estimation"
+        outputs:
+          - "Validation report"
+          - "Simulation results"
+          - "Printability assessment"
+          - "Cost estimate"
+          
+      aligner:
+        name: "Product Manager"
+        title: "Product Manager"
+        mindset: "I ensure the design meets the product requirements"
+        responsibilities:
+          - Validate design against specifications
+          - Confirm fit, form, and function
+          - Assess manufacturing constraints
+          - Verify timeline and budget alignment
+        tools:
+          - "Product specifications"
+          - "Constraint analysis"
+          - "Requirement traceability"
+        outputs:
+          - "Design specification validation"
+          - "Requirement coverage matrix"
+          - "Risk register"
+    
+    verification_methods:
+      mesh_integrity:
+        name: "Mesh Integrity Check"
+        tool: "Netfabb / Meshmixer"
+        criteria: "Watertight, manifold, no non-manifold edges"
+        
+      structural_simulation:
+        name: "Structural Analysis"
+        tool: "FEA simulation"
+        criteria: "Safety factor > 2x under load"
+        
+      printability:
+        name: "Printability Assessment"
+        tool: "Cura / PrusaSlicer"
+        criteria: "No unprintable features, supports identified"
+        
+      cost_analysis:
+        name: "Cost Estimation"
+        tool: "Material calculators"
+        criteria: "Within budget"
+        
+    deliverable_format: "CAD package with validation report and manufacturing specs"
+    
+    documentation_template: |
+      ## Manufacturing Deliverable
+      
+      ### 3D Model
+      - Format: {format}
+      - Dimensions: {dimensions}
+      - Volume: {volume} cm³
+      
+      ### Validation
+      - Mesh: {status}
+      - Structural safety factor: {factor}x
+      - Printability: {status}
+      
+      ### Manufacturing
+      - Material: {material}
+      - Estimated cost: ${cost}
+      - Print time: {time}
+      - Supports required: {yes/no}
+
+  fashion:
+    name: "Fashion / Bridal Design"
+    icon: "👗"
+    keywords:
+      - dress
+      - wedding
+      - fashion
+      - garment
+      - fabric
+      - sewing
+      - pattern
+      - bridal
+      - gown
+      - couture
+    file_extensions: []
+    
+    roles:
+      maker:
+        name: "Designer"
+        title: "Fashion Designer"
+        mindset: "I create beautiful, wearable designs that express vision"
+        responsibilities:
+          - Create design sketches and illustrations
+          - Develop patterns and technical specs
+          - Select fabrics and materials
+          - Design construction details
+        tools:
+          - "Sketching (digital/traditional)"
+          - "Pattern making"
+          - "Draping"
+          - "Fabric selection"
+        outputs:
+          - "Design sketches"
+          - "Pattern files"
+          - "Fabric specifications"
+          - "Construction notes"
+          
+      validator:
+        name: "Fitter"
+        title: "Master Fitter / Seamstress"
+        mindset: "I ensure it fits perfectly and can be beautifully constructed"
+        responsibilities:
+          - Create and fit mockups (toiles)
+          - Assess construction feasibility
+          - Identify fitting issues
+          - Specify alterations needed
+        tools:
+          - "Mockup construction"
+          - "Fitting sessions"
+          - "Pattern adjustment"
+          - "Construction techniques"
+        outputs:
+          - "Fit assessment"
+          - "Mockup photos/notes"
+          - "Alteration list"
+          - "Construction plan"
+          
+      aligner:
+        name: "Bridal Consultant"
+        title: "Bridal Consultant"
+        mindset: "I ensure the dress matches the bride's dream and vision"
+        responsibilities:
+          - Understand bride's vision and preferences
+          - Validate design aligns with wedding theme
+          - Confirm practical constraints (budget, timeline)
+          - Ensure bride loves the design
+        tools:
+          - "Vision boards"
+          - "Style consultation"
+          - "Preference elicitation"
+          - "Fitting coordination"
+        outputs:
+          - "Vision alignment confirmation"
+          - "Style validation"
+          - "Bride approval"
+          - "Timeline coordination"
+    
+    verification_methods:
+      mockup_fitting:
+        name: "Mockup Fitting"
+        tool: "Physical toile/muslin"
+        criteria: "Fits measurements ±0.5 inch"
+        
+      construction_feasibility:
+        name: "Construction Review"
+        tool: "Pattern analysis"
+        criteria: "All seams and techniques are feasible"
+        
+      material_behavior:
+        name: "Fabric Testing"
+        tool: "Swatch testing"
+        criteria: "Drape, sheen, movement as envisioned"
+        
+      client_approval:
+        name: "Bride Approval"
+        tool: "Design presentation"
+        criteria: "Bride confirms "I love it""
+        
+    deliverable_format: "Design package with sketches, patterns, and construction plan"
+    
+    documentation_template: |
+      ## Fashion Deliverable
+      
+      ### Design
+      - Style: {description}
+      - Sketches: {location}
+      - Inspiration: {board}
+      
+      ### Pattern
+      - Size: {measurements}
+      - Pieces: {count}
+      - Fabric required: {yards}
+      
+      ### Validation
+      - Mockup fit: {status}
+      - Construction: {feasible}
+      - Bride approval: {status}
+      
+      ### Construction
+      - Difficulty: {level}
+      - Time estimate: {hours}
+      - Key techniques: {list}
+
+  aerospace:
+    name: "Aerospace Engineering"
+    icon: "🚀"
+    keywords:
+      - rocket
+      - aerospace
+      - structural
+      - flight
+      - space
+      - engineering
+      - component
+      - mission
+      - satellite
+      - propulsion
+    file_extensions:
+      - ".step"
+      - ".iges"
+      - ".CATPart"
+    
+    roles:
+      maker:
+        name: "Engineer"
+        title: "Aerospace Engineer"
+        mindset: "I design precision aerospace components that mission success depends on"
+        responsibilities:
+          - Create engineering designs and drawings
+          - Specify materials and manufacturing
+          - Perform preliminary analysis
+          - Generate Bill of Materials
+        tools:
+          - "CAD (CATIA, SolidWorks, NX)"
+          - "Engineering analysis"
+          - "Materials selection"
+          - "Technical documentation"
+        outputs:
+          - "Engineering drawings"
+          - "CAD models"
+          - "Material specifications"
+          - "Bill of Materials"
+          
+      validator:
+        name: "QA Engineer"
+        title: "Quality Assurance Engineer"
+        mindset: "I validate safety and compliance with zero tolerance for risk"
+        responsibilities:
+          - Perform comprehensive structural analysis
+          - Conduct safety reviews (FMEA)
+          - Verify compliance with standards
+          - Validate test results
+        tools:
+          - "FEA (ANSYS, Nastran)"
+          - "Safety analysis (FMEA, FTA)"
+          - "Testing protocols"
+          - "Compliance verification"
+        outputs:
+          - "Validation report"
+          - "Safety assessment"
+          - "Risk analysis"
+          - "Test results"
+          
+      aligner:
+        name: "Systems Architect"
+        title: "Systems Architect"
+        mindset: "I ensure the component fits the system and mission"
+        responsibilities:
+          - Validate system integration
+          - Ensure mission requirements met
+          - Coordinate interfaces
+          - Verify requirements traceability
+        tools:
+          - "System requirements"
+          - "Mission specifications"
+          - "Interface control documents"
+          - "Integration analysis"
+        outputs:
+          - "System validation"
+          - "Requirements traceability matrix"
+          - "Integration confirmation"
+          - "Mission readiness assessment"
+    
+    verification_methods:
+      structural_analysis:
+        name: "Structural Analysis"
+        tool: "FEA (ANSYS, Nastran)"
+        criteria: "All loads < 50% yield strength"
+        
+      thermal_analysis:
+        name: "Thermal Analysis"
+        tool: "Thermal simulation"
+        criteria: "Within operating temperature range"
+        
+      safety_review:
+        name: "Safety Review"
+        tool: "FMEA, Fault Tree Analysis"
+        criteria: "All critical risks mitigated"
+        
+      integration_check:
+        name: "Integration Verification"
+        tool: "CAD assembly, ICD review"
+        criteria: "Physical and functional interfaces verified"
+        
+    deliverable_format: "Engineering package with drawings, analysis, and certifications"
+    
+    documentation_template: |
+      ## Aerospace Deliverable
+      
+      ### Engineering
+      - Drawing: {number}
+      - Revision: {rev}
+      - Material: {spec}
+      
+      ### Analysis
+      - Structural: {safety_factor}x safety factor
+      - Thermal: {status}
+      - Vibration: {status}
+      
+      ### Safety
+      - FMEA: {completed}
+      - Critical items: {list}
+      - Risk acceptance: {authority}
+      
+      ### Mission
+      - Requirements met: {N}/{total}
+      - Integration: {verified}
+      - Launch readiness: {status}
+
+  enterprise:
+    name: "Enterprise Software"
+    icon: "🏢"
+    keywords:
+      - corporate
+      - enterprise
+      - system
+      - platform
+      - application
+      - business
+      - organization
+      - scale
+      - integration
+    file_extensions:
+      - ".java"
+      - ".cs"
+      - ".go"
+      - ".rb"
+    
+    roles:
+      maker:
+        name: "Developer"
+        title: "Enterprise Developer"
+        mindset: "I build robust, scalable enterprise systems"
+        responsibilities:
+          - Develop enterprise-grade software
+          - Implement security and compliance
+          - Build for scale and reliability
+          - Create integrations
+        tools:
+          - "Enterprise languages (Java, C#, Go)"
+          - "Frameworks (Spring, .NET)"
+          - "Databases (SQL, NoSQL)"
+          - "APIs and microservices"
+        outputs:
+          - "Production code"
+          - "API specifications"
+          - "Database schemas"
+          - "Integration code"
+          
+      validator:
+        name: "QA / Security Auditor"
+        title: "Quality & Security Assurance"
+        mindset: "I ensure enterprise-grade quality and security"
+        responsibilities:
+          - Comprehensive testing (unit, integration, e2e)
+          - Security scanning and penetration testing
+          - Performance and load testing
+          - Compliance validation
+        tools:
+          - "Test automation (Selenium, JMeter)"
+          - "Security scanners (Snyk, OWASP)"
+          - "Performance testing"
+          - "Compliance frameworks"
+        outputs:
+          - "Test reports"
+          - "Security assessment"
+          - "Performance benchmarks"
+          - "Compliance validation"
+          
+      aligner:
+        name: "Product Owner"
+        title: "Product Owner"
+        mindset: "I maximize business value and stakeholder satisfaction"
+        responsibilities:
+          - Define and prioritize features
+          - Validate business value
+          - Manage stakeholder expectations
+          - Confirm user acceptance
+        tools:
+          - "Product backlog"
+          - "User stories"
+          - "Stakeholder management"
+          - "ROI analysis"
+        outputs:
+          - "Prioritized backlog"
+          - "Acceptance criteria"
+          - "Stakeholder sign-off"
+          - "Value validation"
+    
+    verification_methods:
+      feature_testing:
+        name: "Feature Testing"
+        tool: "Automated test suite"
+        criteria: "All critical features pass"
+        
+      security_scan:
+        name: "Security Assessment"
+        tool: "SAST/DAST scanners"
+        criteria: "No critical vulnerabilities"
+        
+      performance_test:
+        name: "Performance Validation"
+        tool: "Load testing (JMeter, k6)"
+        criteria: "Meets SLAs under load"
+        
+      user_acceptance:
+        name: "User Acceptance Testing"
+        tool: "UAT environment"
+        criteria: "Stakeholders approve"
+        
+    deliverable_format: "Production system with documentation and compliance package"
+    
+    documentation_template: |
+      ## Enterprise Deliverable
+      
+      ### System
+      - Architecture: {diagram}
+      - Services: {list}
+      - APIs: {documentation}
+      
+      ### Quality
+      - Test coverage: {N}%
+      - Security scan: {status}
+      - Performance: {metrics}
+      
+      ### Compliance
+      - Standards: {list}
+      - Audits: {passed}
+      - Certifications: {list}
+      
+      ### Deployment
+      - Environment: {config}
+      - Rollback plan: {document}
+      - Monitoring: {setup}

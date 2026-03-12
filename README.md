@@ -1,7 +1,8 @@
 # 🎩 Native Consultant
 
 > **Native Kimi CLI skill for structured AI consulting.**  
-> Works with `kimi chat` and `kimi web`.
+> Works with `kimi chat` and `kimi web`.  
+> Maker creates. Validator verifies. Aligner ensures fit.
 
 ---
 
@@ -28,42 +29,54 @@ xcopy /E /I "native-consultant" "%USERPROFILE%\.config\agents\skills\native-cons
 **Via terminal (`kimi chat`):**
 ```cmd
 kimi chat
-> kimi consultant
+> consult
 ```
 
 **Via web interface (`kimi web`):**
 ```cmd
 kimi web
-> kimi consultant
+> consult
 ```
-
-The `kimi web` command starts a web interface in your browser with the same consulting workflow.
 
 ---
 
-## What's New in v4.0
+## Terminal Format
 
-This CLI skill is built on [consulting-core](../consulting-core) with UX improvements:
+All responses use clean terminal-style columns:
 
-| Before | After |
-|--------|-------|
-| 10 bullets | **6 bullets** — less cognitive load |
-| 7 phases | **5 phases + Exploration** — prototype first |
-| "YOLO mode" | **"Fast-Track mode"** — professional naming |
-| 4 phases before code | **Prototype in Phase 1** — immediate value |
-| Orchestrator/PM/Subagents | **Single "I"** — clearer role |
+```
+STATUS    Discovery — Maker: standby | Validator: standby | Aligner: active
+ACTIVE    Aligner — Interviewing user
+VERIFY    Requirements clarity check
+ALIGN     3/5 questions answered
+
+What's the success criteria?
+OPTIONS   explore | consult | fast-track
+```
+
+---
+
+## The Trio
+
+You talk to the **Contact** (AI). Behind the scenes:
+
+| Role | Job | Mindset |
+|------|-----|---------|
+| **Maker** | Creates deliverable | "I build it" |
+| **Validator** | Verifies it works | "I find what's broken" |
+| **Aligner** | Ensures right problem | "I solve the real need" |
+
+Quality comes from tension between roles, not one AI doing everything.
 
 ---
 
 ## Commands
 
-Once activated, say:
-
 | Command | What It Does |
 |---------|--------------|
+| `consult` | Start standard 6-phase workflow |
 | `explore` | Quick prototype/spike (10 min) |
-| `consult` | Standard workflow (thorough) |
-| `fast-track` | Express mode (smart defaults) |
+| `fast-track` | Express mode (3 questions) |
 | `show preview` | Display HTML preview panel |
 | `status` | Current phase and progress |
 | `pause` | Save state, resume later |
@@ -71,71 +84,153 @@ Once activated, say:
 
 ---
 
-## The 6-Bullet Format
-
-```
-• [Status] 🔍 Discovery — Understanding your needs
-• [Learned] Key insight from this exchange
-• [Risk] What to watch out for
-• [Progress] ●●●●○ (4/5)
-• [→] Primary question or action
-• [○] Alternative option
-```
-
----
-
 ## Workflow
 
 ```
-ENTRY:
-┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-│  🚀 Explore │  │  🔍 Consult │  │  ⚡ Fast    │
-│  10 min     │  │  Standard   │  │  Express    │
-└──────┬──────┘  └──────┬──────┘  └──────┬──────┘
-       │                │                │
-       └────────────────┴────────────────┘
-                          │
-       ┌──────────────────┼──────────────────┐
-       │                  │                  │
-       ▼                  ▼                  ▼
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│  Prototype  │    │  Full       │    │  Assumptions│
-│  validated  │ →  │  workflow   │    │  + build    │
-└─────────────┘    └─────────────┘    └─────────────┘
+ENTRY: consult | explore | fast-track
+    │
+    ▼
+┌──────────────────┐
+│ DOMAIN DETECTION │ ← Auto-detect or specify
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│ 1. DISCOVERY     │ ← Aligner interviews
+│ REQUIREMENTS.md  │
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│ 2. DESIGN REVIEW │ ← Gate: [A]pprove/[R]evise/[C]ancel
+│ Select approach  │
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│ 3. BUILD         │ ← Maker + Validator parallel
+│ Create deliverable│
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│ 4. VALIDATION    │ ← Gate: [P]ass/[F]ix/[F]ail
+│ Verify it works  │
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│ 5. FINAL QA      │ ← Pre-delivery checklist
+│ All three review │
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│ 6. DELIVERY      │ ← Git commit + archive
+│ Handover         │
+└──────────────────┘
 ```
 
 ---
 
-## Project Files
+## Example Session
 
-Created automatically in your working directory:
+```
+User: consult
 
-| File | Purpose |
-|------|---------|
-| `PROJECT.md` | Requirements + Design (combined) |
-| `CONTRACT.md` | Agreement + acceptance criteria |
-| `STATUS.md` | Live progress tracking |
-| `VERIFICATION.md` | Evidence of completion |
+AI: 🎩 Universal Consultant v6.1
+
+    STATUS    Standby — Maker: ready | Validator: ready | Aligner: active
+    ACTIVE    Aligner — Awaiting your challenge
+    VERIFY    Context stack ready
+    ALIGN     Domain: software
+    
+    What are we building?
+    OPTIONS   explore | consult | fast-track
+
+User: I need a Python script to rename photos by date
+
+AI: STATUS    Discovery — Maker: standby | Validator: standby | Aligner: active
+    ACTIVE    Aligner — Clarifying requirements
+    VERIFY    Requirements gathering
+    ALIGN     1/5 questions answered
+    
+    Which photo formats? (JPG, RAW, etc.)
+    OPTIONS   specify formats | skip to design
+
+User: JPG only, Windows
+
+AI: [Design Review Gate]
+    Maker proposes: Python + os/exif libraries
+    Validator: Testable, low risk
+    Aligner: Matches requirements
+    
+    [A]pprove  [R]evise  [C]ancel
+
+User: A
+
+AI: STATUS    Build — Maker: 80% | Validator: 8/8 pass | Aligner: aligned
+    ACTIVE    Maker — Writing EXIF date extraction
+    VERIFY    Validator: All tests passing
+    ALIGN     On track
+    
+    Building deliverable...
+    OPTIONS   show progress | pause
+
+AI: [Validation Gate]
+    Verification: 8/8 tests pass, 100% coverage
+    
+    [P]ass  [F]ix  [F]ail
+
+User: P
+
+AI: Deliverable: photo_renamer.py
+    Evidence: task-001/evidence/
+    
+    [Push to git]  [Make changes]
+
+User: Push
+
+AI: ✅ Delivered and archived.
+```
 
 ---
 
-## For Kimi Web Users
+## Five Domains
 
-When using `kimi web`:
-- The same consulting workflow runs in your browser
-- HTML preview panels render inline
-- File operations work via the web interface
-- All commands (`explore`, `consult`, `fast-track`) work the same
+| Domain | Maker | Validator | Aligner | Use For |
+|--------|-------|-----------|---------|---------|
+| **software** | Coder | Tester | Business Analyst | Python, JavaScript, APIs |
+| **manufacturing** | Designer | Engineer | Product Manager | 3D printing, CAD |
+| **fashion** | Designer | Fitter | Consultant | Wedding dresses, garments |
+| **aerospace** | Engineer | QA | Architect | Rocket parts, components |
+| **enterprise** | Developer | QA/Security | Product Owner | Corporate systems |
+
+---
+
+## Safety
+
+**Never without confirmation:**
+- Delete files outside working directory
+- Push to main/master
+- Skip validation gates
+- Claim delivery without evidence
+
+**Always required:**
+- Explicit approval at gates
+- Evidence for verification claims
+- Human review before delivery
+- Git commit with full context
 
 ---
 
 ## Troubleshooting
 
-### "kimi consultant" doesn't activate
+### "consult" doesn't activate
 
 Check if skill is installed:
 ```cmd
-dir "%USERPROFILE%\.config\agents\skills\native-consultant"
+dir "%USERPROFILE%\.config\agents\skills\consultancy"
 ```
 
 If not found, re-run `INSTALL.bat`.
@@ -144,20 +239,8 @@ If not found, re-run `INSTALL.bat`.
 
 Restart your Kimi CLI session:
 ```cmd
-# Exit and restart
 kimi chat
-# or
-kimi web
 ```
-
----
-
-## Related Projects
-
-| Project | Purpose |
-|---------|---------|
-| [consulting-core](../consulting-core) | Shared knowledge base |
-| [universal-consultant](../universal-consultant) | Prompts for other AIs |
 
 ---
 
