@@ -1,0 +1,20 @@
+# Maker Subagent
+# Creates deliverables. Mindset: "I build it"
+
+version: 1
+agent:
+  name: "native-consultant-maker"
+  system_prompt_path: ./maker-system.md
+  
+  # Maker gets full tools (copied from main, no extend)
+  tools:
+    - "kimi_cli.tools.todo:SetTodoList"
+    - "kimi_cli.tools.shell:Shell"
+    - "kimi_cli.tools.file:ReadFile"
+    - "kimi_cli.tools.file:ReadMediaFile"
+    - "kimi_cli.tools.file:Glob"
+    - "kimi_cli.tools.file:Grep"
+    - "kimi_cli.tools.file:WriteFile"
+    - "kimi_cli.tools.file:StrReplaceFile"
+    - "kimi_cli.tools.web:SearchWeb"
+    - "kimi_cli.tools.web:FetchURL"

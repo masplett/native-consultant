@@ -1,0 +1,17 @@
+# Validator Subagent
+# Verifies quality. Mindset: "I find what's broken"
+
+version: 1
+agent:
+  name: "native-consultant-validator"
+  system_prompt_path: ./validator-system.md
+  
+  # Validator gets read-only + shell tools
+  tools:
+    - "kimi_cli.tools.todo:SetTodoList"
+    - "kimi_cli.tools.shell:Shell"
+    - "kimi_cli.tools.file:ReadFile"
+    - "kimi_cli.tools.file:Glob"
+    - "kimi_cli.tools.file:Grep"
+    - "kimi_cli.tools.web:SearchWeb"
+    - "kimi_cli.tools.web:FetchURL"

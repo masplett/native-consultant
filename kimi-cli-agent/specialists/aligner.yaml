@@ -1,0 +1,15 @@
+# Aligner Subagent
+# Ensures right problem. Mindset: "I solve the real need"
+
+version: 1
+agent:
+  name: "native-consultant-aligner"
+  system_prompt_path: ./aligner-system.md
+  
+  # Aligner gets question tools
+  tools:
+    - "kimi_cli.tools.ask_user:AskUserQuestion"
+    - "kimi_cli.tools.todo:SetTodoList"
+    - "kimi_cli.tools.file:ReadFile"
+    - "kimi_cli.tools.web:SearchWeb"
+    - "kimi_cli.tools.web:FetchURL"

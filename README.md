@@ -19,6 +19,28 @@
 
 ---
 
+## 🚀 Kimi CLI Native Agent (NEW)
+
+**[→ Go to kimi-cli-agent directory](kimi-cli-agent/)**
+
+A standalone **Kimi CLI Agent** implementation that brings the native-consultant workflow directly into kimi-cli as a first-class agent. Features:
+
+- **Native integration** — Load with `--agent-file` or install to `~/.config/agents/`
+- **6 specialist subagents** — Maker, Validator, Aligner, plus Security, Performance, and Requirements Analyst
+- **Full tool access** — All kimi-cli tools available (file, shell, web, multiagent, etc.)
+- **Parallel execution** — Maker and Validator work simultaneously via `Task` tool
+- **Interactive gates** — Built-in approval flows using `AskUserQuestion`
+
+**Quick Start:**
+```bash
+kimi --agent-file ./kimi-cli-agent/agent.yaml
+> consult
+```
+
+[Learn more →](kimi-cli-agent/README.md)
+
+---
+
 ## Quick Start
 
 ### Install

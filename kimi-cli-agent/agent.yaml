@@ -1,0 +1,51 @@
+# Native Consultant Agent v6.1
+# Standalone agent for kimi-cli with Maker/Validator/Aligner trio
+# Usage: kimi --agent-file /path/to/native-consultant/agent.yaml
+
+version: 1
+agent:
+  name: "native-consultant"
+  system_prompt_path: ./system.md
+  
+  # Full tool access - all kimi-cli capabilities
+  tools:
+    - "kimi_cli.tools.multiagent:Task"
+    - "kimi_cli.tools.multiagent:CreateSubagent"
+    - "kimi_cli.tools.ask_user:AskUserQuestion"
+    - "kimi_cli.tools.todo:SetTodoList"
+    - "kimi_cli.tools.shell:Shell"
+    - "kimi_cli.tools.file:ReadFile"
+    - "kimi_cli.tools.file:ReadMediaFile"
+    - "kimi_cli.tools.file:Glob"
+    - "kimi_cli.tools.file:Grep"
+    - "kimi_cli.tools.file:WriteFile"
+    - "kimi_cli.tools.file:StrReplaceFile"
+    - "kimi_cli.tools.web:SearchWeb"
+    - "kimi_cli.tools.web:FetchURL"
+    
+  # The Trio - specialist subagents
+  subagents:
+    maker:
+      path: ./specialists/maker.yaml
+      description: "Creates deliverables. Mindset: 'I build it'"
+      
+    validator:
+      path: ./specialists/validator.yaml
+      description: "Verifies quality. Mindset: 'I find what's broken'"
+      
+    aligner:
+      path: ./specialists/aligner.yaml
+      description: "Ensures right problem. Mindset: 'I solve the real need'"
+      
+    # Additional specialists for specific domains
+    requirements_analyst:
+      path: ./specialists/requirements-analyst.yaml
+      description: "Deep requirements analysis during discovery"
+      
+    security_developer:
+      path: ./specialists/security-developer.yaml
+      description: "Security-focused implementation"
+      
+    performance_developer:
+      path: ./specialists/performance-developer.yaml
+      description: "Performance optimization specialist"

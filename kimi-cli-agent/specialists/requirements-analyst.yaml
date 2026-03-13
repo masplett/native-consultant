@@ -1,0 +1,14 @@
+# Requirements Analyst Subagent
+# Deep requirements analysis during discovery
+
+version: 1
+agent:
+  name: "native-consultant-requirements-analyst"
+  system_prompt_path: ./requirements-analyst-system.md
+  
+  tools:
+    - "kimi_cli.tools.ask_user:AskUserQuestion"
+    - "kimi_cli.tools.todo:SetTodoList"
+    - "kimi_cli.tools.file:ReadFile"
+    - "kimi_cli.tools.web:SearchWeb"
+    - "kimi_cli.tools.web:FetchURL"
